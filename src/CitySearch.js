@@ -3,7 +3,8 @@ import React, { Component } from "react";
 class CitySearch extends Component {
     state = {
         query: '',
-        suggestions: []
+        suggestions: [],
+        showSuggestions: undefined
     }
 
     handleInputChanged = (event) => {
@@ -13,8 +14,7 @@ class CitySearch extends Component {
         });
         this.setState({
             query: value,
-            suggestions,
-            showSuggestions: undefined
+            suggestions
         });
     };
 
