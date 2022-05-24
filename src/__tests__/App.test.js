@@ -70,4 +70,21 @@ describe('<App /> integration', () => {
         AppWrapper.unmount();
     });
 
+    //NumberofEvents tests
+    test('pass number of events as 32 as default', () => {
+        const AppWrapper = mount(<App />);
+        const NumberOfEventsState = AppWrapper.state('eventCount');
+        expect(NumberOfEventsState).not.toEqual(undefined);
+        expect(AppWrapper.find(NumberofEvents).props().eventCount).toEqual(32);
+        AppWrapper.unmount();
+    });
+
+    // test('change eventCount state when NumberofEvents changes', async () => {
+    //     const AppWrapper = mount(<App />);
+    //     AppWrapper.find('.number-of-events').simulate('change', { target: { value: 16 } });
+    //     expect(AppWrapper.state('eventCount')).toEqual(16);
+    //     AppWrapper.unmount();
+    // });
+
+
 });

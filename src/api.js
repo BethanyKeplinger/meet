@@ -14,7 +14,7 @@ export const extractLocations = (events) => {
     return locations;
 };
 
-export const checkToken = async (accessToken) => {
+const checkToken = async (accessToken) => {
     const result = await fetch(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`)
         .then((res) => res.json())
         .catch((error) => error.json());
@@ -34,7 +34,7 @@ export const getEvents = async () => {
 
     if (token) {
         removeQuery();
-        const url = 'https://glqizo3zn6.execute-api.us-east-1.amazonaws.com/dev/api/get-events' + '/' + token;
+        const url = 'https://glqizo3zn6.execute-api.us-east-1.amazonaws.com/dev/api/get-events/token';
         const result = await axios.get(url);
         if (result.data) {
             var locations = extractLocations(result.data.events);
@@ -81,7 +81,7 @@ const removeQuery = () => {
 const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const { access_token } = await fetch(
-        'https://glqizo3zn6.execute-api.us-east-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+        `https://glqizo3zn6.execute-api.us-east-1.amazonaws.com/dev/api/token/${encodeCode}`
     )
         .then((res) => {
             return res.json();
