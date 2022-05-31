@@ -19,10 +19,11 @@ class NumberofEvents extends Component {
                 numberOfEvents: number,
             });
         }
-        this.props.updateEvents(number);
+        this.props.updateNumberOfEvents(number);
     }
 
     render() {
+
         return (
             <div className="number-of-events">
                 <p>Number of Events</p>
