@@ -20,7 +20,6 @@ describe('show/hide an event details', () => {
     });
 
 
-
     test('An event element is collapsed by default', async () => {
         const eventDetails = await page.$('.event .extra-details');
         expect(eventDetails).toBeNull();
@@ -43,3 +42,18 @@ describe('show/hide an event details', () => {
     });
 
 });
+
+
+describe('Filter events by city', () => {
+
+    test('When user hasnt searched for a city, show upcoming events from all cities.', async () => {
+        const browser = await puppeteer.launch();
+
+        const page = await browser.newPage();
+        await page.goto('http://localhost:300/meet');
+
+        await page.waitForSelector('.CitySearch');
+
+    })
+
+})
