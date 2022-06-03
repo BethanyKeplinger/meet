@@ -16,11 +16,12 @@ const credentials = {
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-  redirect_uris: ["https://BethanyKeplinger.github.io/meet/"],
-  javascript_origins: ["https://BethanyKeplinger.github.io", "http://localhost:3000"],
+  redirect_uris: ["https://bethanykeplinger.github.io/meet/"],
+  javascript_origins: ["https://bethanykeplinger.github.io", "http://localhost:3000"],
 };
 
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
+
 const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
@@ -88,6 +89,9 @@ module.exports.getAccessToken = async (event) => {
       console.error(err);
       return {
         statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        },
         body: JSON.stringify(err),
       };
     });
@@ -101,7 +105,7 @@ module.exports.getCalendarEvents = async (event) => {
   );
 
   const access_token = decodeURIComponent(`${event.pathParameters.access_token}`)
-  oAuth2Client.setCredentials({ access_token })
+  oAuth2Client.setCredentials({ access_token });
 
   return new Promise((resolve, reject) => {
     calendar.events.list(
@@ -134,6 +138,9 @@ module.exports.getCalendarEvents = async (event) => {
       console.error(err);
       return {
         statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        },
         body: JSON.stringify(err),
       };
     });
