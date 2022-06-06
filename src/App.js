@@ -9,6 +9,7 @@ import './nprogress.css';
 import WelcomeScreen from './WelcomeScreen';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import EventGenre from './EventGenre';
+import { OfflineAlert } from './Alert';
 
 
 class App extends Component {
@@ -68,6 +69,16 @@ class App extends Component {
         }
       });
     }
+
+    if (!navigator.online) {
+      this.setState({
+        offlineText: 'You are currently offline. The events displayed may not be up to date.'
+      });
+    } else {
+      this.setState({
+        offlineText: ''
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -76,7 +87,7 @@ class App extends Component {
 
   render() {
     if (this.state.showWelcomScreen === undefined) return <div className='App' />
-    const { locations, numberOfEvents, events } = this.state;
+    const { locations, numberOfEvents, events, offlineText } = this.state;
     return (
       <div className="App">
         <h1>Meet App</h1>
@@ -105,9 +116,10 @@ class App extends Component {
 
         <h4> Events in each city</h4>
 
-
-
         <EventList events={events} />
+
+        <OfflineAlert text={offlineText} />
+
         <WelcomeScreen showWelcomScreen={this.state.showWelcomScreen} getAccessToken={() => { getAccessToken() }} />
 
 
