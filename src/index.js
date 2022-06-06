@@ -10,12 +10,14 @@ import * as atatus from 'atatus-spa';
 // const root = createRoot(container);
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
+ReactDOM.render(<App />, document.getElementById('root'));
 // root.render(<App tab="home" />);
 
 // If you want your app to work offline and load faster, you can change
