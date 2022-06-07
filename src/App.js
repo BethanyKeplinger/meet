@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import './nprogress.css';
+
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberofEvents from './NumberofEvents';
-import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
-import './nprogress.css';
+// import WelcomeScreen from './WelcomeScreen';
+// import EventGenre from './EventGenre';
 
-import WelcomeScreen from './WelcomeScreen';
+import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import EventGenre from './EventGenre';
+
 // import { OfflineAlert } from './Alert';
 
 
@@ -121,7 +123,7 @@ class App extends Component {
 
         {/* <OfflineAlert text={offlineText} /> */}
 
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
 
 
       </div>
