@@ -4,6 +4,8 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 const EventGenre = ({ events }) => {
     const [data, setData] = useState([]);
 
+    const COLORS = ['c40c06', '#e0792f', '##e0d22f', '##19b52c', '#2522d4'];
+
     useEffect(() => {
         const getData = () => {
             const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
@@ -19,7 +21,7 @@ const EventGenre = ({ events }) => {
         setData(() => getData());
     }, [events]);
 
-    const COLORS = ['c40c06', '#e0792f', '##e0d22f', '##19b52c', '#2522d4'];
+
 
     // const RADIAN = Math.PI / 180;
     // const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
