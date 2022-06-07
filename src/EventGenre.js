@@ -5,20 +5,19 @@ const EventGenre = ({ events }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        const getData = () => {
+            const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
+            const data = genres.map((genre) => {
+                const value = events.filter(({ summary }) =>
+                    summary.split(' ').includes(genre)
+                ).length;
+
+                return { name: genre, value };
+            });
+            return data.filter((genre) => { return genre.value > 0 });
+        };
         setData(() => getData());
     }, [events]);
-
-    const getData = () => {
-        const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
-        const data = genres.map((genre) => {
-            const value = events.filter(({ summary }) =>
-                summary.split(' ').includes(genre)
-            ).length;
-
-            return { name: genre, value };
-        });
-        return data;
-    };
 
     const COLORS = ['c40c06', '#e0792f', '##e0d22f', '##19b52c', '#2522d4'];
 
