@@ -9,7 +9,7 @@ import './nprogress.css';
 import WelcomeScreen from './WelcomeScreen';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import EventGenre from './EventGenre';
-import { OfflineAlert } from './Alert';
+// import { OfflineAlert } from './Alert';
 
 
 class App extends Component {
@@ -38,15 +38,15 @@ class App extends Component {
       });
     }
 
-    if (!navigator.online) {
-      this.setState({
-        offlineText: 'You are currently offline. The events displayed may not be up to date.',
-      });
-    } else {
-      return this.setState({
-        offlineText: '',
-      });
-    }
+    // if (!navigator.online) {
+    //   this.setState({
+    //     offlineText: 'You are currently offline. The events displayed may not be up to date.',
+    //   });
+    // } else {
+    //   return this.setState({
+    //     offlineText: '',
+    //   //   });
+    // }
   }
 
   updateEvents = (location, numberOfEvents) => {
@@ -119,7 +119,7 @@ class App extends Component {
 
         <EventList events={events} />
 
-        <OfflineAlert text={offlineText} />
+        {/* <OfflineAlert text={offlineText} /> */}
 
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
 
