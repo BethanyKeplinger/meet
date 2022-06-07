@@ -14,7 +14,7 @@ const EventGenre = ({ events }) => {
 
                 return { name: genre, value };
             });
-            return data.filter((genre) => { return genre.value > 0 });
+            return data;
         };
         setData(() => getData());
     }, [events]);

@@ -6,12 +6,12 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberofEvents from './NumberofEvents';
 import WelcomeScreen from './WelcomeScreen';
-// import EventGenre from './EventGenre';
+import EventGenre from './EventGenre';
 
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-// import { OfflineAlert } from './Alert';
+import { OfflineAlert } from './Alert';
 
 
 class App extends Component {
@@ -40,15 +40,15 @@ class App extends Component {
       });
     }
 
-    // if (!navigator.online) {
-    //   this.setState({
-    //     offlineText: 'You are currently offline. The events displayed may not be up to date.',
-    //   });
-    // } else {
-    //   return this.setState({
-    //     offlineText: '',
-    //   //   });
-    // }
+    if (!navigator.online) {
+      this.setState({
+        offlineText: 'You are currently offline. The events displayed may not be up to date.',
+      });
+    } else {
+      return this.setState({
+        offlineText: '',
+      });
+    }
   }
 
   updateEvents = (location, numberOfEvents) => {
@@ -87,6 +87,7 @@ class App extends Component {
     this.mounted = false;
   }
 
+
   render() {
     if (this.state.showWelcomeScreen === undefined) return <div className='App' />
     const { locations, numberOfEvents, events, offlineText } = this.state;
@@ -98,7 +99,7 @@ class App extends Component {
         <NumberofEvents numberOfEvents={numberOfEvents} updateNumberOfEvents={this.updateNumberOfEvents} />
 
         <div className='data-vis-wrapper'>
-          {/* <EventGenre events={events} /> */}
+          <EventGenre events={events} />
           <ResponsiveContainer height={400} >
             <ScatterChart
               margin={{
@@ -121,7 +122,7 @@ class App extends Component {
 
         <EventList events={events} />
 
-        {/* <OfflineAlert text={offlineText} /> */}
+        <OfflineAlert text={offlineText} />
 
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
 
