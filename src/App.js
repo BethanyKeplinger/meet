@@ -20,6 +20,7 @@ class App extends Component {
     numberOfEvents: 32,
     currentLocation: 'all',
     showWelcomeScreen: undefined,
+    offlineText: false,
   }
 
   async componentDidMount() {
@@ -43,7 +44,7 @@ class App extends Component {
       });
     } else {
       return this.setState({
-        offlineText: false
+        offlineText: '',
       });
     }
   }
@@ -120,7 +121,7 @@ class App extends Component {
 
         <OfflineAlert text={offlineText} />
 
-        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
 
 
       </div>

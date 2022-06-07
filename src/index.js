@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 // import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
-import * as atatus from 'atatus-spa';
+// import * as atatus from 'atatus-spa';
 
 // const container = document.getElementById('app');
 // const root = createRoot(container);
@@ -32,4 +32,4 @@ serviceWorkerRegistration.register();
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-atatus.config('530f6b25e42249e49653a87dcdb5c9c5').install();
+// atatus.config('530f6b25e42249e49653a87dcdb5c9c5').install();
