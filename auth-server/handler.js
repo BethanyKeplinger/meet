@@ -33,11 +33,7 @@ const oAuth2Client = new google.auth.OAuth2(
  * and be authorized to see your calendar. After logging in, they'll recieve a code as a URL parameter
  */
 module.exports.getAuthURL = async () => {
-  /**
-   * Scopes array passed to the `scope` option. Any scopes passed must be enabled in the 
-   * OAuth consent screen settings in your project on your google console. Also, any oassed
-   * scoeps are the ones users will see when the consent screen is displayed to them
-   */
+
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
@@ -64,11 +60,6 @@ module.exports.getAccessToken = async (event) => {
   const code = decodeURIComponent(`${event.pathParameters.code}`);
 
   return new Promise((resolve, reject) => {
-    /**
-     * Exchange authorization code for access token witha a "callback" after the exchange,
-     * THe callback in this case is an arrow function with the results as parameters: error and token.
-     */
-
     oAuth2Client.getToken(code, (err, token) => {
       if (err) {
         return reject(err);

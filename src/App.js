@@ -19,7 +19,33 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     currentLocation: 'all',
-    showWelcomScreen: undefined
+    showWelcomeScreen: undefined,
+  }
+
+  async componentDidMount() {
+    this.mounted = true;
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ events, locations: extractLocations(events) });
+        }
+      });
+    }
+
+    if (!navigator.online) {
+      this.setState({
+        offlineText: 'You are currently offline. The events displayed may not be up to date.',
+      });
+    } else {
+      return this.setState({
+        offlineText: false
+      });
+    }
   }
 
   updateEvents = (location, numberOfEvents) => {
@@ -54,44 +80,18 @@ class App extends Component {
     return data;
   };
 
-
-  async componentDidMount() {
-    this.mounted = true;
-    const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get("code");
-    this.setState({ showWelcomScreen: !(code || isTokenValid) });
-    if ((code || isTokenValid) && this.mounted) {
-      getEvents().then((events) => {
-        if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
-        }
-      });
-    }
-
-    if (!navigator.online) {
-      this.setState({
-        offlineText: 'You are currently offline. The events displayed may not be up to date.'
-      });
-    } else {
-      this.setState({
-        offlineText: ''
-      });
-    }
-  }
-
   componentWillUnmount() {
     this.mounted = false;
   }
 
   render() {
-    if (this.state.showWelcomScreen === undefined) return <div className='App' />
+    if (this.state.showWelcomeScreen === undefined) return <div className='App' />
     const { locations, numberOfEvents, events, offlineText } = this.state;
     return (
       <div className="App">
         <h1>Meet App</h1>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
+
         <NumberofEvents numberOfEvents={numberOfEvents} updateNumberOfEvents={this.updateNumberOfEvents} />
 
         <div className='data-vis-wrapper'>
@@ -120,7 +120,7 @@ class App extends Component {
 
         <OfflineAlert text={offlineText} />
 
-        <WelcomeScreen showWelcomScreen={this.state.showWelcomScreen} getAccessToken={() => { getAccessToken() }} />
+        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
 
 
       </div>

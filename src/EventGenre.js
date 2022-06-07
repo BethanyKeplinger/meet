@@ -4,6 +4,10 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 const EventGenre = ({ events }) => {
     const [data, setData] = useState([]);
 
+    useEffect(() => {
+        setData(() => getData());
+    }, [events]);
+
     const getData = () => {
         const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
         const data = genres.map((genre) => {
@@ -15,11 +19,6 @@ const EventGenre = ({ events }) => {
         });
         return data;
     };
-
-    useEffect(() => {
-        setData(() => getData());
-    }, [events]);
-
 
     const COLORS = ['c40c06', '#e0792f', '##e0d22f', '##19b52c', '#2522d4'];
 
