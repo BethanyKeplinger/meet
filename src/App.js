@@ -5,7 +5,7 @@ import './nprogress.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberofEvents from './NumberofEvents';
-import WelcomeScreen from './WelcomeScreen';
+// import WelcomeScreen from './WelcomeScreen';
 import EventGenre from './EventGenre';
 
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
@@ -124,7 +124,7 @@ class App extends Component {
 
         <OfflineAlert text={offlineText} />
 
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
 
 
       </div>
