@@ -29,10 +29,10 @@ class App extends Component {
     this.mounted = true;
     if (!navigator.online) {
       this.setState({
-        offlineText: 'You are currently offline. The events displayed may not be up to date.',
+        offlineText: 'You are currently offline. The events displayed may not be up to date.'
       });
     } else {
-      return this.setState({
+      this.setState({
         offlineText: '',
       });
     }
@@ -125,11 +125,11 @@ class App extends Component {
         <EventList events={events} />
 
         <div className={offlineText === "" ? "alert-container" : "alert-container-visible"}>
-          <OfflineAlert text={offlineText} />
+          <OfflineAlert className="OfflineAlert" text={offlineText} />
         </div>
 
 
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
 
 
       </div>

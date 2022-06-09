@@ -130,14 +130,9 @@ input[type="number"] {
   font-family: sans-serif;
 }
 
-.OfflineAlert {
+.Alert {
   position: relative;
   top: 20px;
-}
-
-.InfoAlert {
-  position: fixed;
-  top: 60px;
 }
 
 .alert-container {
@@ -150,21 +145,20 @@ input[type="number"] {
 
 .alert-container-visible {
   position: fixed;
-  top: 10px;
+  /* top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  right: 35%;
-  left: 35%;
+  right: 0%;
+  left: 100%;
   border-radius: 25px;
   height: 3em;
-  background-color: #eee;
-  padding: 30px;
+  padding: 30px; */
 }
 
 .data-vis-wrapper {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
 }
 
