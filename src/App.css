@@ -130,9 +130,36 @@ input[type="number"] {
   font-family: sans-serif;
 }
 
-.Alert {
-  position: fixed;
+.OfflineAlert {
+  position: relative;
   top: 20px;
+}
+
+.InfoAlert {
+  position: fixed;
+  top: 60px;
+}
+
+.alert-container {
+  position: fixed;
+  top: 10px;
+  right: 50%;
+  height: 3em;
+  padding: 30px;
+}
+
+.alert-container-visible {
+  position: fixed;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 35%;
+  left: 35%;
+  border-radius: 25px;
+  height: 3em;
+  background-color: #eee;
+  padding: 30px;
 }
 
 .data-vis-wrapper {
@@ -219,5 +246,10 @@ input[type="number"] {
     max-width: 50%;
     min-width: auto;
     margin: 0 auto;
+  }
+
+  .alert-container-visible {
+    right: 20%;
+    left: 20%;
   }
 }
