@@ -5,7 +5,7 @@ import './nprogress.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberofEvents from './NumberofEvents';
-// import WelcomeScreen from './WelcomeScreen';
+import WelcomeScreen from './WelcomeScreen';
 import EventGenre from './EventGenre';
 
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
@@ -22,11 +22,21 @@ class App extends Component {
     numberOfEvents: 32,
     currentLocation: 'all',
     showWelcomeScreen: undefined,
-    offlineText: false,
+    offlineText: ""
   }
 
   async componentDidMount() {
     this.mounted = true;
+    if (!navigator.online) {
+      this.setState({
+        offlineText: 'You are currently offline. The events displayed may not be up to date.',
+      });
+    } else {
+      return this.setState({
+        offlineText: '',
+      });
+    }
+
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
@@ -40,15 +50,7 @@ class App extends Component {
       });
     }
 
-    if (!navigator.online) {
-      this.setState({
-        offlineText: 'You are currently offline. The events displayed may not be up to date.',
-      });
-    } else {
-      return this.setState({
-        offlineText: '',
-      });
-    }
+
   }
 
   updateEvents = (location, numberOfEvents) => {
@@ -124,7 +126,7 @@ class App extends Component {
 
         <OfflineAlert text={offlineText} />
 
-        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
 
 
       </div>
