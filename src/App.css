@@ -135,6 +135,10 @@ input[type="number"] {
   top: 20px;
 }
 
+/* .InfoAlert {
+  position: relative;
+} */
+
 .alert-container {
   position: fixed;
   top: 10px;
