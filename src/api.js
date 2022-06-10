@@ -15,29 +15,25 @@ export const extractLocations = (events) => {
 };
 
 export const checkToken = async (accessToken) => {
-    const result = await fetch(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`)
+    const result = await fetch(
+        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+    )
         .then((res) => res.json())
         .catch((error) => error.json());
 
     return result;
 };
 
-const removeQuery = () => {
-    if (window.history.pushState && window.location.pathname) {
-        var newurl =
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            window.location.pathname;
-        window.history.pushState("", "", newurl);
-    } else {
-        newurl = window.location.protocol + "//" + window.location.host;
-        window.history.pushState("", "", newurl);
-    }
-};
+
 
 export const getEvents = async () => {
     NProgress.start();
+
+    if (!navigator.onLine) {
+        const data = localStorage.getItem("lastEvents");
+        NProgress.done();
+        return data ? JSON.parse(data).events : [];;
+    }
 
     if (window.location.href.startsWith('http://localhost')) {
         NProgress.done();
@@ -48,12 +44,6 @@ export const getEvents = async () => {
     //     var locations = extractLocations(result.data.events);
     //     localStorage.setItem('lastEvents', JSON.stringify(result.data));
     //     localStorage.setItem('locations', JSON.stringify(locations));
-    // }
-
-    // if (!navigator.onLine) {
-    //     const data = localStorage.getItem("lastEvents");
-    //     NProgress.done();
-    //     return data ? JSON.parse(data).events : [];;
     // }
 
     const token = await getAccessToken();
@@ -70,21 +60,6 @@ export const getEvents = async () => {
         NProgress.done();
         return result.data.events;
     }
-};
-
-const getToken = async (code) => {
-    const encodeCode = encodeURIComponent(code);
-    const { access_token } = await fetch(
-        'https://glqizo3zn6.execute-api.us-east-1.amazonaws.com/dev/api/token' + '/' + encodeCode
-    )
-        .then((res) => {
-            return res.json();
-        })
-        .catch((error) => error);
-
-    access_token && localStorage.setItem('access_token', access_token);
-
-    return access_token;
 };
 
 export const getAccessToken = async () => {
@@ -104,6 +79,36 @@ export const getAccessToken = async () => {
     }
     return accessToken;
 };
+
+const removeQuery = () => {
+    if (window.history.pushState && window.location.pathname) {
+        var newurl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname;
+        window.history.pushState("", "", newurl);
+    } else {
+        newurl = window.location.protocol + "//" + window.location.host;
+        window.history.pushState("", "", newurl);
+    }
+};
+
+const getToken = async (code) => {
+    const encodeCode = encodeURIComponent(code);
+    const { access_token } = await fetch(
+        'https://glqizo3zn6.execute-api.us-east-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+    )
+        .then((res) => {
+            return res.json();
+        })
+        .catch((error) => error);
+
+    access_token && localStorage.setItem('access_token', access_token);
+
+    return access_token;
+};
+
 
 
 

@@ -49,8 +49,10 @@ class App extends Component {
         }
       });
     }
+  }
 
-
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   updateEvents = (location, numberOfEvents) => {
@@ -85,9 +87,6 @@ class App extends Component {
     return data;
   };
 
-  componentWillUnmount() {
-    this.mounted = false;
-  }
 
 
   render() {
@@ -96,12 +95,16 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Meet App</h1>
+
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
 
         <NumberofEvents numberOfEvents={numberOfEvents} updateNumberOfEvents={this.updateNumberOfEvents} />
 
+
         <div className='data-vis-wrapper'>
+
           <EventGenre events={events} />
+
           <ResponsiveContainer height={400} >
             <ScatterChart
               margin={{
@@ -129,7 +132,7 @@ class App extends Component {
         </div>
 
 
-        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
 
 
       </div>
