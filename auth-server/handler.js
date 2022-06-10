@@ -2,10 +2,6 @@ const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const calendar = google.calendar("v3");
 
-/**
- * SCOPES allows you to set access levels; this is set to readonly for now because you don't have access right to update the calendar yourself
- * For more information, check out the SCOPES documentation at this link: https://developers.google.com/identity/protocols/oauth2/scopes
- */
 const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 
 const credentials = {
@@ -48,7 +44,7 @@ module.exports.getAuthURL = async () => {
       authUrl: authUrl,
     }),
   };
-};
+}
 
 module.exports.getAccessToken = async (event) => {
   const oAuth2Client = new google.auth.OAuth2(
@@ -86,7 +82,7 @@ module.exports.getAccessToken = async (event) => {
         body: JSON.stringify(err),
       };
     });
-};
+}
 
 module.exports.getCalendarEvents = async (event) => {
   const oAuth2Client = new google.auth.OAuth2(
@@ -128,11 +124,11 @@ module.exports.getCalendarEvents = async (event) => {
     .catch((err) => {
       console.error(err);
       return {
-        statusCode: 500,
+        statusCode: 50,
         headers: {
           "Access-Control-Allow-Origin": "*"
         },
         body: JSON.stringify(err),
       };
     });
-};
+}
