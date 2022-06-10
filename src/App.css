@@ -140,10 +140,10 @@ input[type="number"] {
   font-family: sans-serif;
 }
 
-/* .Alert {
+.alert {
   position: fixed;
   top: 20px;
-} */
+}
 
 /* .InfoAlert {
   background-color: #bcdcdb;
