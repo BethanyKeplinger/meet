@@ -127,9 +127,9 @@ class App extends Component {
 
         <EventList events={events} />
 
-        {/* <div className={this.state.offlineText === "" ? "alert-container" : "alert-container-visible"}>
+        <div className={this.state.offlineText === "" ? "alert-container" : "alert-container-visible"}>
           <OfflineAlert className="OfflineAlert" text={this.state.offlineText} />
-        </div> */}
+        </div>
 
 
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
