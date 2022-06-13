@@ -27,7 +27,7 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true;
-    if (!navigator.online) {
+    if (!navigator.onLine) {
       this.setState({
         offlineText: 'You are currently offline. The events displayed may not be up to date.'
       });
@@ -128,7 +128,7 @@ class App extends Component {
 
         <EventList events={events} />
 
-        <div className={navigator.online === true ? "alert-container" : "alert-container-visible"}>
+        <div className={navigator.onLine === true ? "alert-container" : "alert-container-visible"}>
           <OfflineAlert className="OfflineAlert" text={this.state.offlineText} />
         </div>
 
