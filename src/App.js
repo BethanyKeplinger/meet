@@ -92,6 +92,7 @@ class App extends Component {
   render() {
     if (this.state.showWelcomeScreen === undefined) return <div className='App' />
     const { locations, numberOfEvents, events } = this.state;
+    console.log("offline", this.state.offlineText);
     return (
       <div className="App">
         <h1>Meet App</h1>
